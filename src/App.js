@@ -1,30 +1,40 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function Food({ fav }) {
-    return <h5>I love {fav}!</h5>;
+function Food({ fav, rating }) {
+    return (
+        <div>
+            <h5>I love {fav}!</h5>
+            <h5>rating : {rating}</h5>
+        </div>
+    );
 }
+
+Food.propTypes = {
+    fav: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+};
 
 const foodLikes = [
     {
         id: 1,
         name: "kimchi",
+        rating: 5,
     },
     {
         id: 2,
         name: "pizza",
+        rating: 3.4,
     },
     {
         id: 3,
         name: "hamburger",
+        rating: 1.0,
     },
 ];
 
-const testJsxList = foodLikes.map((food, index) => {
-    return <Food fav={food.name} key={index} />;
-});
-
 const renderFood = (dish, index) => {
-    return <Food fav={dish.name} key={dish.id} />;
+    return <Food key={dish.id} fav={dish.name} rating={dish.rating} />;
 };
 
 function App() {
@@ -32,10 +42,6 @@ function App() {
         <div className="App">
             <h1>Hello world!</h1>
             {foodLikes.map(renderFood)}
-            {testJsxList}
-            <Food fav="kimchi" something={true} papa={["hello", 1, 2, 3, 4]} />
-            <Food fav="ramen" />
-            <Food fav="hamguger" />
         </div>
     );
 }
